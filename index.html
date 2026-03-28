@@ -1,1 +1,350 @@
-<h1>Welcome to Denvod</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>denvod — Бесплатная ERP-платформа с визуальным конструктором</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Основные стили и цвета в вашей концепции */
+        :root {
+            --bg-color: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --primary: #2563eb; /* Основной синий */
+            --primary-dark: #1d4ed8;
+            --gray-block: #e5e7eb;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 { font-weight: 800; tracking: -0.025em; margin-bottom: 0.5em; }
+        p { color: var(--text-muted); margin-bottom: 1.5em; font-size: 1.1rem; }
+
+        /* Шапка сайта */
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gray-block);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Наш CSS-логотип в стиле вашей концепции (сетка квадратов) */
+        .logo-icon {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            width: 24px;
+            height: 24px;
+        }
+        .logo-icon div { background-color: #d1d5db; border-radius: 2px; } /* серые */
+        .logo-icon div:nth-child(2), .logo-icon div:nth-child(4) { background-color: #1f2937; } /* темно-серые */
+        .logo-icon div:nth-child(5) { background-color: var(--primary); } /* акцентный синий */
+
+        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
+
+        .nav-links { display: flex; gap: 20px; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Главный блок (Hero) */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-block);
+        }
+        .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.3em; }
+        .hero-subtitle { max-width: 700px; margin: 0 auto 40px; }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 700;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+        .btn:hover { background-color: var(--primary-dark); }
+        .btn-secondary { background-color: var(--bg-color); color: var(--text-main); margin-left: 10px; border: 1px solid var(--gray-block); }
+        .btn-secondary:hover { background-color: var(--gray-block); }
+
+        /* Секции с контентом */
+        .section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
+
+        /* Блок возможностей (сетка) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-block);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .feature-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .feature-card p { font-size: 1rem; margin-bottom: 0; }
+
+        /* Углубленный функционал (аккордеоны или табы - здесь просто чистый список) */
+        .functionality-block {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-block);
+        }
+        .func-item { margin-bottom: 30px; }
+        .func-item h4 { font-size: 1.1rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+        .func-list { list-style: disc; margin-left: 20px; color: var(--text-muted); }
+        .func-list li { margin-bottom: 5px; }
+
+        /* Как запустить и Тестирование */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .guide-block, .testing-block {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-block);
+        }
+        .step-list, .test-list { list-style: decimal; margin-left: 20px; color: var(--text-muted); }
+        .step-list li, .test-list li { margin-bottom: 10px; font-weight: 600; color: var(--text-main); }
+        .step-list li span, .test-list li span { font-weight: 400; color: var(--text-muted); }
+
+        /* Статус и Лицензия */
+        .status-license { background-color: var(--white); border-top: 1px solid var(--gray-block); }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 60px 0;
+        }
+        .status-block, .license-block { padding: 20px; }
+        .license-alert { background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px; color: #92400e; margin-top: 20px; }
+
+        /* Подвал */
+        footer {
+            background-color: var(--white);
+            padding: 30px 0;
+            border-top: 1px solid var(--gray-block);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .guide-grid, .footer-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Скрываем меню на мобильных для простоты */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-content">
+        <a href="/" class="logo-block">
+            <div class="logo-icon">
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+            </div>
+            <span class="logo-text">denvod</span>
+        </a>
+        <nav class="nav-links">
+            <a href="#features">Возможности</a>
+            <a href="#start">Запуск</a>
+            <a href="#test">Тестирование</a>
+            <a href="https://github.com/denvod-tech/platform" target="_blank">GitHub</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>denvod</h1>
+        <p class="hero-subtitle">Бесплатная ERP-платформа с визуальным конструированием прикладного решения. Описывайте справочники, документы, логику и запускайте единое приложение в runtime.</p>
+        <div class="hero-buttons">
+            <a href="https://github.com/denvod-tech/platform/releases" class="btn" target="_blank">Скачать релиз (.exe)</a>
+            <a href="#features" class="btn btn-secondary">Узнать больше</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container" style="text-align: center; max-width: 800px;">
+        <h2>О проекте</h2>
+        <p>denvod развивается как собственная платформа автоматизации. Этот сайт и GitHub-репозиторий используются как точка распространения скомпилированной версии и как место для сбора замечаний по тестированию.</p>
+    </div>
+</section>
+
+<section id="features" class="section">
+    <div class="container">
+        <h2 class="section-title">Что уже умеет denvod</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🛠 Конструирование</h3>
+                <p>Создание и редактирование конфигураций, описание справочников и документов.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎨 Дизайнер форм</h3>
+                <p>Настройка форм и их элементов в визуальном редакторе.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💻 Встроенный DSL</h3>
+                <p>Написание прикладной логики на собственном языке, отладка в режиме выполнения.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔍 Запросы в Runtime</h3>
+                <p>Создание и выполнение запросов к базе данных непосредственно во время работы.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📚 Работа с регистрами</h3>
+                <p>Поддержка регистров сведений, истории, остатков и оборотов. Проведение документов.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Построитель Отчетов</h3>
+                <p>Мощный инструмент для сборки отчетов, настройки показателей, формул и условного оформления.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background-color: #f3f4f6;">
+    <div class="container">
+        <h2 class="section-title">Основной функционал платформы</h2>
+        <div class="functionality-block">
+            <div class="guide-grid">
+                
+                <div class="func-item">
+                    <h4>Метаданные</h4>
+                    <p>Настраивайте: справочники, документы, формы, запросы, функции, события, регистры.</p>
+                    <h4>Формы</h4>
+                    <ul class="func-list">
+                        <li>Формы объекта, списка, выбора</li>
+                        <li>Автогенерация, если форма не описана</li>
+                        <li>Элементы, группы, вкладки, таблицы, командные панели</li>
+                    </ul>
+                </div>
+
+                <div class="func-item">
+                    <h4>Прикладная логика (DSL)</h4>
+                    <ul class="func-list">
+                        <li>События формы и объектов</li>
+                        <li>Проведение документов</li>
+                        <li>Обработчики запросов и функции</li>
+                    </ul>
+                    <h4>Запросы и Регистры</h4>
+                    <ul class="func-list">
+                        <li>Собственный язык и конструктор запросов</li>
+                        <li>Виртуальные таблицы регистров: Остатки, Обороты</li>
+                        <li>Пакеты запросов, параметры</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="start" class="section">
+    <div class="container guide-grid">
+        
+        <div class="guide-block">
+            <h3>Как скачать и запустить</h3>
+            <ol class="step-list">
+                <li>Скачайте. <span>Скачайте скомпилированную версию из релизов на GitHub.</span></li>
+                <li>Запустите. <span>Запустите .exe файл.</span></li>
+                <li>Настройте. <span>Создайте конфигурацию и настройте подключение к базе данных.</span></li>
+                <li>Опубликуйте. <span>Опубликуйте конфигурацию и перейдите в режим работы.</span></li>
+            </ol>
+            <p style="margin-top: 20px; font-size: 0.9rem;">Если вы нашли проблему, пожалуйста, оставьте замечание в <a href="https://github.com/denvod-tech/platform/issues" target="_blank" style="color: var(--primary); font-weight: 600;">Issues на GitHub</a>.</p>
+        </div>
+
+        <div id="test" class="testing-block">
+            <h3>Что полезно тестировать</h3>
+            <ul class="test-list">
+                <li>Справочники и документы <span>(создание, редактирование)</span></li>
+                <li>Формы <span>(списка, объекта)</span></li>
+                <li>Проведение <span>(и отмена проведения документов)</span></li>
+                <li>Запросы и движений по регистрам</li>
+                <li>Построитель отчётов и варианты отчёта</li>
+                <li>Отладчик DSL</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<section class="status-license">
+    <div class="container footer-grid">
+        <div class="status-block">
+            <h3>Статус проекта</h3>
+            <p>denvod активно развивается. Платформа уже позволяет собирать и запускать решения, но интерфейсы, UX и механизмы всё ещё шлифуются.</p>
+            <p><strong>Проект пригоден для активного тестирования.</strong></p>
+        </div>
+        <div class="license-block">
+            <h3>Лицензия</h3>
+            <p>Проект распространяется <strong>бесплатно в скомпилированном виде</strong> по собственной закрытой лицензии.</p>
+            <div class="license-alert">
+                Исходный код не предоставляется. Перепродажа, white-label, OEM и SaaS для третьих лиц запрещены без разрешения.
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem;"><a href="https://github.com/denvod-tech/platform/blob/main/LICENSE" target="_blank" style="color: var(--primary);">Полный текст лицензии</a></p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 denvod. Официальный сайт проекта.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">Разработано для ИТ-инфраструктуры СНГ.</p>
+    </div>
+</footer>
+
+</body>
+</html>
